@@ -1,0 +1,40 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrahead %}
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content={{google_client_id}}>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+    <div class="submit-row">
+      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    </div>
+  </div>
+
+<script>
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    var id_token = googleUser.getAuthResponse().id_token;
+
+    $.ajax({
+      type: "POST",
+      url: "/admin/login/",
+      data: JSON.stringify({ token: id_token }),
+      contentType: "application/json; charset=utf-8",
+      success: function(){
+        window.location.href = '/admin';
+      },
+    });
+  }
+</script>
+{% endblock %}
