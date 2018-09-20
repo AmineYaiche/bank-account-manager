@@ -1,6 +1,7 @@
 import json
 
 from django.conf import settings
+from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
@@ -29,3 +30,9 @@ class LoginView(View):
             raise ValueError('Wrong issuer.')
         login_or_create_administrator(request, id_info)
         return HttpResponse('/admin')
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return render(request, 'administrators/logout.html', {'google_client_id': settings.GOOGLE_CLIENT_ID})
