@@ -2,3 +2,4 @@ Django==2.1.*
 requests==2.19.*
 google-auth==1.5.*
 psycopg2-binary==2.7.*
+schwifty
