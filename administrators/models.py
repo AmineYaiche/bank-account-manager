@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import ugettext as _
 
 
 class Administrator(models.Model):
@@ -8,3 +9,7 @@ class Administrator(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+    class Meta:
+        verbose_name = _('Administrator')
+        verbose_name_plural = _('Administrators')

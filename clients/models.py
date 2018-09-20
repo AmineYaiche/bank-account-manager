@@ -1,7 +1,8 @@
 from django.db import models
+from django.utils.translation import ugettext as _
 
 from administrators.models import Administrator
-from clients.validators import validate_name, validate_iban
+from .validators import validate_name, validate_iban
 
 
 class Client(models.Model):
@@ -12,3 +13,7 @@ class Client(models.Model):
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+    class Meta:
+        verbose_name = _('Client')
+        verbose_name_plural = _('Clients')
