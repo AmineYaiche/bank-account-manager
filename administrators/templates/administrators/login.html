@@ -6,6 +6,8 @@
   <meta name="google-signin-client_id" content={{google_client_id}}>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
 {% endblock %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />{% endblock %}
@@ -16,7 +18,7 @@
 
 {% block content %}
   <div id="content-main">
-    <div class="submit-row">
+    <div class="submit-row">{% csrf_token %}
       <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     </div>
   </div>
@@ -31,6 +33,9 @@
       url: "/admin/login/",
       data: JSON.stringify({ token: id_token }),
       contentType: "application/json; charset=utf-8",
+      headers: {
+        "X-CSRFToken": Cookies.get('csrftoken')
+      },
       success: function(){
         window.location.href = '/admin';
       },

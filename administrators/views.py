@@ -13,10 +13,6 @@ from .utils import login_or_create_administrator
 
 
 class LoginView(View):
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super(LoginView, self).dispatch(request, *args, **kwargs)
-
     def get(self, request):
         return render(request, 'administrators/login.html', {"google_client_id": settings.GOOGLE_CLIENT_ID})
 
