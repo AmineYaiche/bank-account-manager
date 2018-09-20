@@ -37,7 +37,7 @@
         "X-CSRFToken": Cookies.get('csrftoken')
       },
       success: function(){
-        window.location.href = '/admin';
+        window.location.href = "{{next_url}}";
       },
     });
   }

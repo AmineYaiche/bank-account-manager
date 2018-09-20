@@ -15,7 +15,11 @@ from .utils import login_or_create_administrator
 
 class LoginView(View):
     def get(self, request):
-        return render(request, 'administrators/login.html', {"google_client_id": settings.GOOGLE_CLIENT_ID})
+        next_url = request.GET.get('next', '')
+        return render(request, 'administrators/login.html', {
+            "google_client_id": settings.GOOGLE_CLIENT_ID,
+            "next_url": next_url
+        })
 
     def post(self, request):
         token = json.loads(request.body.decode('utf-8')).get('token')
