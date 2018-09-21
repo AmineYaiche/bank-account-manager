@@ -1,0 +1,16 @@
+version: "3"
+services:
+  backend:
+    build: ./backend/
+    ports:
+      - "8000:80"
+    environment:
+      - DATABASE_HOST=postgres
+    env_file: env_file
+    command: /bin/bash /usr/src/backend/start.sh
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432"
+    env_file: env_file

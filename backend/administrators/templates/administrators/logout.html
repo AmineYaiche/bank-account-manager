@@ -4,8 +4,8 @@
   <script src="https://apis.google.com/js/platform.js"></script>
   <script>
     gapi.load('auth2', function(){
-      gapi.auth2.init({client_id: "{{ google_client_id }}", scope: 'openid'}).then(function(){
-      gapi.auth2.getAuthInstance().signOut();
+        gapi.auth2.init({client_id: "{{ google_client_id }}", scope: 'openid'}).then(function(){
+        gapi.auth2.getAuthInstance().signOut();
       })
     })
   </script>
