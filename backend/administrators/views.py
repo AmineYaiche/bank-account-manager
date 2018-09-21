@@ -15,6 +15,9 @@ from .utils import login_or_create_administrator
 
 class LoginView(View):
     def get(self, request):
+        """
+        Renders the login.html page
+        """
         next_url = request.GET.get('next', '')
         return render(request, 'administrators/login.html', {
             "google_client_id": settings.GOOGLE_CLIENT_ID,
@@ -22,6 +25,9 @@ class LoginView(View):
         })
 
     def post(self, request):
+        """
+        Log a user in. It expects in the request body the token received from google auth service.
+        """
         token = json.loads(request.body.decode('utf-8')).get('token')
         if token is None:
             return HttpResponse('Token is not provided', status=400)
