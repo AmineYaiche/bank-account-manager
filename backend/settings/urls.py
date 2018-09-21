@@ -21,5 +21,5 @@ from administrators.views import LoginView, LogoutView
 urlpatterns = [
     path('admin/login/', LoginView.as_view()),
     path('admin/logout/', LogoutView.as_view()),
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
 ]
